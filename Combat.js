@@ -1,8 +1,8 @@
-import { gameState } from './state.js';
-import { cardDatabase, maxHandSize, staggerThreshold } from './constants.js';
-import { elements, updateUI, renderHand, showResultsScreen } from './ui.js';
-import { playHurtSFX, playClashSFX, playBGM, playVictoryChime, playDefeatDrone } from './audio.js';
-import { screenFlash, createHitEffect, playerHitEffect, triggerLimbusImpactShake } from './vfx.js';
+import { gameState } from './State.js';
+import { cardDatabase, maxHandSize, staggerThreshold } from './Constants.js';
+import { elements, updateUI, renderHand, showResultsScreen } from './Ui.js';
+import { playHurtSFX, playClashSFX, playBGM, playVictoryChime, playDefeatDrone } from './Audio.js';
+import { screenFlash, createHitEffect, playerHitEffect, triggerLimbusImpactShake } from './Vfx.js';
 
 // Roll coin untuk adu dadu clash
 export function rollCoin(sp) {
