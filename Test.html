@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library of Ruina Style Battle</title>
+    <link rel="stylesheet" href="Style.css">
+</head>
+<body>
+
+<div id="game">
+    <button id="startCombatBtn">START COMBAT</button>
+
+    <div id="ui">
+        <div class="player-status">
+            <div class="bar-label">PLAYER HP</div>
+            <div class="hp-bar-player">
+                <div class="hp-fill-player" id="playerHp"></div>
+            </div>
+            <div id="sanityText">Sanity: 0</div>
+            <div id="lightText">Light: 5 / 5</div>
+            <div class="queue-label">Antrean Aksi: <span id="playerQueueText">-</span></div>
+        </div>
+
+        <div class="enemy-status">
+            <div class="bar-label">ENEMY HP</div>
+            <div class="hp-bar">
+                <div class="hp-fill" id="enemyHp"></div>
+            </div>
+            <div id="enemySanityText">Enemy Sanity: 0</div>
+            <div id="enemyLightText">Enemy Light: 5 / 5</div>
+            <div class="queue-label">Aksi Musuh: <span id="enemyQueueText">? Slots</span></div>
+        </div>
+
+        <div id="battleLog">Pilih kartu aksi kamu, lalu tekan START COMBAT!</div>
+    </div>
+
+    <div id="player" class="idle"></div>
+    <div id="enemy" class="enemy-idle"></div>
+
+    <div id="handContainer"></div>
+    
+    <!-- Limbus Style Results Screen Overlay -->
+<div id="resultsScreen" class="results-overlay hidden">
+    <div class="results-glitch-bg"></div>
+    <div class="results-frame">
+        <div class="stamp-container">
+            <span id="resultsGrade" class="grade-stamp">EX</span>
+        </div>
+        <div class="results-text-group">
+            <h1 id="resultsTitle" class="results-title">VICTORY</h1>
+            <div class="results-line"></div>
+            <p id="resultsSubtitle" class="results-subtitle">ALL TARGETS SILENCED</p>
+        </div>
+        <div class="results-stats">
+            <p>Turns taken: <span id="statTurns">0</span></p>
+            <p>Sanity Remaining: <span id="statSanity">0</span></p>
+        </div>
+        <button id="restartBtn" class="limbus-btn">RETURN TO MEPHISTOPHELES</button>
+    </div>
+</div>
+    
+</div>
+
+<audio id="bgm" autoplay loop>
+   <source src="keter_battle_1.mp3" type="audio/mpeg">
+</audio>
+<audio id="clashSFX" src="clash.mp3" preload="auto"></audio>
+
+<audio id="bgm" src="tiphereth_bgm.mp3" loop></audio>
+<audio id="clashSFX" src="clash.mp3" preload="auto"></audio>
+<audio id="hurtSFX" src="hurt.mp3" preload="auto"></audio>
+
+<audio id="bgm" src="tiphereth_bgm.mp3" loop></audio>
+<audio id="clashSFX" src="clash.mp3" preload="auto"></audio>
+<audio id="hurtSFX" src="hurt.mp3" preload="auto"></audio>
+
+<audio id="bgm" src="tiphereth_bgm.mp3" loop></audio>
+<audio id="bgmPhase2" src="keter_battle_2.mp3" loop></audio> 
+<!-- Load the game engine script as a module -->
+<script type="module" src="Main.js"></script>
+
+
+</body>
+</html>

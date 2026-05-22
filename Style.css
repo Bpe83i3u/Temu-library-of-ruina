@@ -1,0 +1,603 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+body {
+    background: #0a0a0a;
+    overflow: hidden;
+    font-family: 'Courier New', Courier, monospace;
+    color: #222222; 
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* =======================================================
+   STAGE PANGGUNG PUTIH DENGAN DEKORASI BORDER EMAS LUXURY
+   ======================================================= */
+#game {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    height: 100%;
+    max-height: 600px;
+    overflow: hidden;
+    background: linear-gradient(180deg, #ffffff 0%, #f5f5f5 80%, #e0e0e0 100%);
+    
+    /* MODIFIKASI: Border panggung luar diganti Emas Metalik */
+    border: 3px solid #d4af37; 
+    box-shadow: 0 0 35px rgba(212, 175, 55, 0.3);
+}
+
+/* TOMBOL START COMBAT EMAS RAMPING */
+#startCombatBtn {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 99;
+    padding: 6px 16px;
+    font-weight: bold;
+    font-size: 11px;
+    font-family: inherit;
+    color: #ffffff;
+    background: linear-gradient(180deg, #d4af37 0%, #8a6f27 100%); /* Warna tombol senada emas */
+    border: 1px solid #ffd700;
+    border-radius: 4px;
+    cursor: pointer;
+    letter-spacing: 2px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    transition: all 0.2s ease;
+}
+
+#startCombatBtn:hover {
+    background: linear-gradient(180deg, #ffd700 0%, #b3923b 100%);
+    border-color: #ffffff;
+}
+
+/* =======================================================
+   UI STATUS ATAS ULTRA RAMPING DENGAN SENTUHAN BORDER EMAS
+   ======================================================= */
+#ui {
+    position: absolute;
+    top: 8px;
+    width: 100%;
+    padding: 0 12px;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+    z-index: 50;
+}
+
+.player-status, .enemy-status {
+    width: 26%; 
+    background: rgba(255, 255, 255, 0.95); 
+    padding: 4px 8px;
+    
+    /* MODIFIKASI: Ujung tepian border kotak HP diganti warna emas tipis elegan */
+    border: 2px solid #d4af37; 
+    border-radius: 4px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+.bar-label {
+    font-size: 9px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #444444;
+    margin-bottom: 1px;
+}
+
+/* Bar Hp ramping minimalis */
+.hp-bar, .hp-bar-player {
+    width: 100%;
+    height: 7px;
+    background: #e0e0e0;
+    border: 1px solid #cccccc;
+    border-radius: 1px;
+    overflow: hidden;
+    margin-bottom: 2px;
+}
+
+.hp-fill-player {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #111111 0%, #666666 100%);
+    transition: width 0.3s ease;
+}
+
+.hp-fill {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #555555 0%, #aaaaaa 100%);
+    transition: width 0.3s ease;
+}
+
+#sanityText, #enemySanityText, #lightText, #enemyLightText, .queue-label {
+    font-size: 9px;
+    margin-top: 1px;
+    color: #444444;
+    line-height: 1.1;
+}
+
+.queue-label span {
+    color: #000000;
+    font-weight: bold;
+}
+
+/* LOG PERTEMPURAN TENGAH ATAS DENGAN BORDER EMAS */
+#battleLog {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 44%;
+    text-align: center;
+    font-size: 9px;
+    color: #ffffff;
+    background: rgba(30, 30, 30, 0.95); 
+    
+    /* MODIFIKASI: Border log tengah dipasangi warna emas */
+    border: 1px solid #d4af37; 
+    border-radius: 4px;
+    line-height: 1.2;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+/* =======================================================
+   ANIMASI POP-UP TEXT BANNER "TURN X" (MONOKROM COMBAT)
+   ======================================================= */
+#turnSplashBanner {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 42px;
+    font-weight: 900;
+    letter-spacing: 6px;
+    color: #111111; /* Hitam tegas ala Library of Ruina */
+    text-shadow: 2px 2px 0px #d4af37; /* Bayangan tipis emas */
+    z-index: 9999;
+    pointer-events: none;
+    font-family: 'Courier New', Courier, monospace;
+    
+    /* Efek animasi muncul membesar lalu menghilang */
+    animation: turnSplashAnim 1.1s ease-in-out forwards;
+}
+
+@keyframes turnSplashAnim {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.7);
+        letter-spacing: 15px;
+    }
+    25% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.05);
+        letter-spacing: 6px;
+    }
+    75% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+        letter-spacing: 4px;
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1.2);
+        letter-spacing: 2px;
+    }
+}
+
+#sanityText, #enemySanityText, #lightText, #enemyLightText, .queue-label {
+    font-size: 9px;
+    margin-top: 1px;
+    color: #444444;
+    line-height: 1.1;
+}
+
+.queue-label span {
+    color: #000000;
+    font-weight: bold;
+}
+
+/* LOG PERTEMPURAN TENGAH ATAS */
+#battleLog {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 44%;
+    text-align: center;
+    font-size: 9px;
+    color: #ffffff;
+    background: rgba(30, 30, 30, 0.9); /* Log tengah tetap gelap agar mudah dibaca */
+    padding: 4px 8px;
+    border: 1px solid #222222;
+    border-radius: 4px;
+    line-height: 1.2;
+}
+
+/* =======================================================
+   TEMPAT KARTU TANGAN (HAND CONTAINER)
+   ======================================================= */
+#handContainer {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: 105px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 6px;
+    overflow-x: auto;
+    padding-bottom: 3px;
+    z-index: 60;
+}
+
+.card {
+    position: relative;
+    width: 70px;
+    height: 95px;
+    background: linear-gradient(135deg, #ffffff 0%, #e8e8e8 100%); /* Kartu dibalik menjadi dominan putih-perak */
+    border: 2px solid #aaaaaa;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+    flex-shrink: 0;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: #111111;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.card.disabled {
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+/* Warna penanda tepi kategori kartu dibikin tegas */
+.card.attack { border-left: 4px solid gold; }
+.card.defend { border-left: 4px solid blue; }
+.card.dodge { border-left: 4px solid cyan; }
+.card.counter { border-left: 4px solid purple; }
+
+.card-cost {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    background: #111111;
+    color: #ffffff;
+    font-size: 9px;
+    font-weight: bold;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-name {
+    margin-top: 25px;
+    font-size: 9px;
+    font-weight: bold;
+    text-align: center;
+    color: #222222;
+}
+
+.card-power {
+    position: absolute;
+    bottom: 4px;
+    width: 100%;
+    font-size: 8px;
+    text-align: center;
+    color: #666666;
+}
+
+/* =======================================================
+   STRUKTUR UTAMA SPRITE ENTIK KARAKTER (Z-INDEX AMAN)
+   ======================================================= */
+#player, #enemy {
+    position: absolute;
+    bottom: 125px; 
+    width: 130px;
+    height: 130px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    z-index: 25; 
+    pointer-events: none;
+}
+
+/* Player siluet hitam pekat */
+#player { 
+    left: 15%; 
+    filter: brightness(0) !important; 
+}
+
+/* Musuh abu-abu monokrom */
+#enemy { 
+    right: 15%; 
+    filter: grayscale(100%); 
+}
+
+/* ANIMASI GERAKAN IDLE DASAR */
+.idle { 
+    background-image: url('idle.png') !important; 
+    animation: bounceAnim 1s infinite ease-in-out;
+}
+
+.enemy-idle { 
+    background-image: url('idle.png') !important; 
+    animation: enemyBounceAnim 1s infinite ease-in-out;
+}
+
+/* POSE AKSI PLAYER */
+.punch { background-image: url('punch_2.png') !important; }
+.kick { background-image: url('kick_2.png') !important; }
+.slash { background-image: url('sword_3.png') !important; }
+.player-guard { background-image: url('block.png') !important; }
+
+/* MODIFIKASI: Evade Player dilepas efek muter/flip-nya, hanya ganti gambar kick_1.png saja */
+.evade-flip { 
+    background-image: url('kick_1.png') !important;
+    transform: scaleX(-1) !important; 
+}
+
+/* Kena hit menggunakan gambar kick_1.png dibalik */
+.player-hit { 
+    background-image: url('kick_1.png') !important; 
+    transform: scaleX(-1) !important; 
+}
+.player-backdash { 
+    background-image: url('idle.png') !important; 
+    opacity: 0.6; 
+}
+.player-damaged { 
+    filter: brightness(1) invert(1) !important; 
+}
+
+/* POSE AKSI MUSUH */
+.enemy-punch { background-image: url('punch_2.png') !important; transform: scaleX(-1); }
+.enemy-kick { background-image: url('kick_2.png') !important; transform: scaleX(-1); }
+.enemy-slash { background-image: url('sword_3.png') !important; transform: scaleX(-1); }
+.enemy-guard { background-image: url('block.png') !important; transform: scaleX(-1) !important; }
+.enemy-counter-pose { background-image: url('block.png') !important; transform: scaleX(-1) !important; }
+
+/* MODIFIKASI: Evade Musuh dilepas efek muter/flip-nya, hanya ganti pose normal menghadap kiri */
+.enemy-evade { 
+    background-image: url('kick_1.png') !important;
+}
+
+.enemy-hurt-counter { 
+    background-image: url('kick_1.png') !important; 
+    transform: scaleX(1) !important; 
+}
+.enemy-backdash { 
+    background-image: url('idle.png') !important; 
+    transform: scaleX(-1); 
+    opacity: 0.6; 
+}
+.enemy-damaged { 
+    filter: grayscale(100%) !important; 
+}
+
+/* =======================================================
+   ANIMASI KEYFRAMES & EFFECT LOGIC
+   ======================================================= */
+@keyframes bounceAnim {
+    0%, 100% { transform: scaleX(1) translateY(0); }
+    50% { transform: scaleX(1) translateY(-4px); }
+}
+
+@keyframes enemyBounceAnim {
+    0%, 100% { transform: scaleX(-1) translateY(0); }
+    50% { transform: scaleX(-1) translateY(-4px); }
+}
+
+.hit-effect {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background-image: url('hit_fx.png');
+    background-size: contain;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 99;
+    filter: grayscale(100%) brightness(0.2); /* FX benturan dibikin agak gelap agar terlihat jelas di bg putih */
+    animation: fxAnim 0.25s steps(3) forwards;
+}
+
+@keyframes fxAnim { 100% { opacity: 0; } }
+
+/* =======================================================
+   LIMBUS RESULTS OVERLAY SYSTEM
+   ======================================================= */
+.results-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 1000;
+    background: rgba(5, 5, 5, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Cinzel', 'Georgia', serif; /* Use serif for Project Moon style */
+    overflow: hidden;
+    color: #fff;
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+}
+
+.results-overlay.show {
+    opacity: 1;
+}
+
+/* Background Glitch Canvas */
+.results-glitch-bg {
+    position: absolute;
+    width: 120%; height: 120%;
+    background: repeating-linear-gradient(0deg, rgba(0,0,0,0.15) 0px, rgba(0,0,0,0.15) 1px, transparent 1px, transparent 3px);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Industrial Frame design */
+.results-frame {
+    position: relative;
+    z-index: 2;
+    width: 85%;
+    max-width: 500px;
+    padding: 40px 20px;
+    background: #0d0d0d;
+    border: 2px solid #333;
+    box-shadow: 0 0 30px rgba(0,0,0,0.8);
+    text-align: center;
+    transform: scale(0.85);
+    transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+    clip-path: polygon(10% 0, 90% 0, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0 90%, 0 10%);
+}
+
+.results-overlay.show .results-frame {
+    transform: scale(1);
+}
+
+/* Typography & Accent Line */
+.results-title {
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: 0.5rem;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.results-line {
+    width: 60%;
+    height: 2px;
+    background: #fff;
+    margin: 15px auto;
+    position: relative;
+}
+
+.results-line::before, .results-line::after {
+    content: '';
+    position: absolute;
+    width: 6px; height: 6px;
+    background: #fff;
+    top: -2px;
+}
+.results-line::before { left: 0; }
+.results-line::after { right: 0; }
+
+.results-subtitle {
+    font-size: 0.9rem;
+    letter-spacing: 0.3rem;
+    color: #888;
+    margin-bottom: 25px;
+}
+
+/* Stats Layout */
+.results-stats {
+    font-family: monospace;
+    font-size: 1rem;
+    margin: 20px 0;
+    color: #ccc;
+    text-transform: uppercase;
+}
+.results-stats span {
+    color: #fff;
+    font-weight: bold;
+}
+
+/* Grade Stamp Style */
+.stamp-container {
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.grade-stamp {
+    font-size: 4rem;
+    font-weight: 900;
+    transform: rotate(-10deg) scale(3);
+    opacity: 0;
+    display: inline-block;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.results-overlay.show .grade-stamp {
+    opacity: 1;
+    transform: rotate(-12deg) scale(1);
+    transition-delay: 0.5s;
+}
+
+/* Theme Options: Golden/EX for Victory, Red/Dissonance for Defeat */
+.victory-theme .results-title {
+    color: #d4af37; /* Limbus Gold */
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+}
+.victory-theme .grade-stamp {
+    color: #d4af37;
+    border: 4px solid #d4af37;
+    padding: 0 15px;
+    clip-path: circle();
+}
+.victory-theme .results-line { background: #d4af37; }
+
+.defeat-theme .results-title {
+    color: #800000; /* Deep crimson red */
+    text-shadow: 0 0 10px rgba(128, 0, 0, 0.6);
+}
+.defeat-theme .grade-stamp {
+    color: #800000;
+    border: 4px dashed #800000;
+    padding: 5px 15px;
+}
+.defeat-theme .results-line { background: #800000; }
+
+/* Limbus Styled Button */
+.limbus-btn {
+    background: transparent;
+    color: #fff;
+    border: 1px solid #444;
+    padding: 12px 24px;
+    font-family: monospace;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    letter-spacing: 0.15rem;
+    outline: none;
+    margin-top: 15px;
+}
+.limbus-btn:hover {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+/* Utilities */
+.hidden { display: none !important; }
+
+/* Camera Shake VFX */
+@keyframes limbus-shake {
+    0%, 100% { transform: translate(0, 0); }
+    10% { transform: translate(-4px, -2px); }
+    30% { transform: translate(3px, 4px); }
+    50% { transform: translate(-5px, 1px); }
+    70% { transform: translate(4px, -3px); }
+    90% { transform: translate(-1px, 3px); }
+}
+.screen-shake-heavy {
+    animation: limbus-shake 0.4s infinite;
+}
