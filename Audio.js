@@ -1,4 +1,4 @@
-import { gameState } from './state.js'; // Import to check current boss phase
+import { gameState } from './State.js'; // Import to check current boss phase
 
 export function safePlayAudio(id, resetTrack = true) {
     const el = document.getElementById(id);
