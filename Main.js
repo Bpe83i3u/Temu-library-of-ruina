@@ -1,12 +1,12 @@
-import { gameState } from 'State.js';
-import { elements, updateUI, renderHand } from 'Ui.js';
+import { gameState } from './state.js';
+import { elements, updateUI, renderHand } from './ui.js';
 import { 
     drawCard, 
     generateEnemyQueue, 
     executeCombatLoop, 
     endTurnPhase,
     rollSpeedDice // BARU
-} from 'Combat.js';
+} from './combat.js';
 
 function hitungKoordinatPanggung() {
     if (!elements.gameStage) return;
