@@ -1,6 +1,6 @@
-import { gameState } from './state.js';
-import { maxPlayerHealth, maxEnemyHealth } from './constants.js';
-import { playBGM } from './audio.js';
+import { gameState } from './State.js';
+import { maxPlayerHealth, maxEnemyHealth } from './Constants.js';
+import { playBGM } from './Audio.js';
 
 // Central DOM elements mapper
 export const elements = {
